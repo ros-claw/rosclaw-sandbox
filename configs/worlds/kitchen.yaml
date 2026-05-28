@@ -1,0 +1,51 @@
+world_id: kitchen
+name: Kitchen Environment
+gravity: [0.0, 0.0, -9.81]
+ground_plane: true
+timestep: 0.002
+objects:
+  - name: counter_main
+    geom_type: box
+    size: [0.8, 0.3, 0.02]
+    position: [0.5, -0.5, 0.9]
+    rgba: [0.8, 0.8, 0.75, 1.0]
+  - name: counter_side
+    geom_type: box
+    size: [0.3, 0.5, 0.02]
+    position: [1.0, -0.2, 0.9]
+    rgba: [0.8, 0.8, 0.75, 1.0]
+  - name: sink_basin
+    geom_type: box
+    size: [0.25, 0.2, 0.08]
+    position: [0.5, -0.5, 0.86]
+    rgba: [0.7, 0.7, 0.75, 1.0]
+  - name: stove_top
+    geom_type: box
+    size: [0.3, 0.25, 0.02]
+    position: [0.2, -0.5, 0.9]
+    rgba: [0.2, 0.2, 0.2, 1.0]
+  - name: stove_knob1
+    geom_type: sphere
+    size: [0.02]
+    position: [0.1, -0.55, 0.92]
+    rgba: [0.8, 0.1, 0.1, 1.0]
+  - name: stove_knob2
+    geom_type: sphere
+    size: [0.02]
+    position: [0.1, -0.45, 0.92]
+    rgba: [0.8, 0.1, 0.1, 1.0]
+  - name: fridge
+    geom_type: box
+    size: [0.35, 0.35, 0.9]
+    position: [-0.5, -0.8, 0.9]
+    rgba: [0.85, 0.9, 0.95, 1.0]
+  - name: island
+    geom_type: box
+    size: [0.5, 0.3, 0.02]
+    position: [0.0, 0.5, 0.9]
+    rgba: [0.6, 0.4, 0.2, 1.0]
+  - name: trash_can
+    geom_type: cylinder
+    size: [0.1, 0.2]
+    position: [-0.8, -0.3, 0.2]
+    rgba: [0.3, 0.5, 0.3, 1.0]

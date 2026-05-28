@@ -1,0 +1,7 @@
+{
+  "robot_id": "universal_robots_ur5e",
+  "world_id": "tabletop",
+  "action_type": "joint_position",
+  "values": [3.5, -3.5, 3.5, -3.5, 3.5, -3.5],
+  "horizon_sec": 2.0
+}

@@ -1,0 +1,6 @@
+world_id: empty
+name: Empty World
+gravity: [0.0, 0.0, -9.81]
+ground_plane: true
+timestep: 0.002
+objects: []

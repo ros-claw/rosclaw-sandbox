@@ -1,0 +1,24 @@
+task_id: ur5e_reach_target
+robot_id: universal_robots_ur5e
+world_id: tabletop
+name: UR5e Reach Target
+
+action:
+  type: joint_position
+  hz: 20
+
+observation:
+  - joint_position
+  - joint_velocity
+  - end_effector_pose
+  - contact
+
+goal:
+  type: reach_pose
+  target_link: tool0
+  target_pose: [0.4, 0.2, 0.3, 0.0, 3.14, 0.0]
+
+termination:
+  max_steps: 500
+  success_distance: 0.03
+  collision_fail: true

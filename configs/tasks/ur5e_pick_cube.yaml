@@ -1,0 +1,24 @@
+task_id: ur5e_pick_cube
+robot_id: universal_robots_ur5e
+world_id: tabletop
+name: UR5e Pick Cube
+
+action:
+  type: joint_position
+  hz: 20
+
+observation:
+  - joint_position
+  - joint_velocity
+  - end_effector_pose
+  - contact
+
+goal:
+  type: pick
+  target_object: cube
+  lift_height: 0.1
+
+termination:
+  max_steps: 1000
+  success_distance: 0.05
+  collision_fail: false

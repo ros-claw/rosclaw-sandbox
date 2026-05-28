@@ -1,0 +1,53 @@
+task_id: ur5e_pick_place_cube
+robot_id: universal_robots_ur5e
+world_id: tabletop
+name: UR5e Pick and Place Cube
+
+action:
+  type: joint_position
+  hz: 20
+
+observation:
+  - joint_position
+  - joint_velocity
+  - end_effector_pose
+  - contact
+  - gripper_state
+
+goal:
+  type: pick_and_place
+  target_object: cube
+  pick_pose: [0.5, 0.0, 0.15, 0.0, 3.14, 0.0]
+  place_pose: [0.5, 0.3, 0.15, 0.0, 3.14, 0.0]
+  gripper_close: 1.0
+  gripper_open: 0.0
+
+stages:
+  - name: reach_pick
+    type: reach_pose
+    target_pose: [0.5, 0.0, 0.15, 0.0, 3.14, 0.0]
+    success_distance: 0.03
+  - name: grasp
+    type: gripper_action
+    target_state: 1.0
+    hold_steps: 10
+  - name: lift
+    type: reach_pose
+    target_pose: [0.5, 0.0, 0.25, 0.0, 3.14, 0.0]
+    success_distance: 0.03
+  - name: move_to_place
+    type: reach_pose
+    target_pose: [0.5, 0.3, 0.25, 0.0, 3.14, 0.0]
+    success_distance: 0.03
+  - name: lower
+    type: reach_pose
+    target_pose: [0.5, 0.3, 0.15, 0.0, 3.14, 0.0]
+    success_distance: 0.03
+  - name: release
+    type: gripper_action
+    target_state: 0.0
+    hold_steps: 10
+
+termination:
+  max_steps: 1000
+  collision_fail: false

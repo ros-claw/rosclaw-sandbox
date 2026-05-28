@@ -1,0 +1,67 @@
+world_id: warehouse
+name: Warehouse Floor
+gravity: [0.0, 0.0, -9.81]
+ground_plane: true
+timestep: 0.002
+objects:
+  - name: shelf1_base
+    geom_type: box
+    size: [0.6, 0.3, 0.02]
+    position: [0.5, -0.8, 0.4]
+    rgba: [0.5, 0.5, 0.5, 1.0]
+  - name: shelf1_mid
+    geom_type: box
+    size: [0.6, 0.3, 0.02]
+    position: [0.5, -0.8, 0.9]
+    rgba: [0.5, 0.5, 0.5, 1.0]
+  - name: shelf1_top
+    geom_type: box
+    size: [0.6, 0.3, 0.02]
+    position: [0.5, -0.8, 1.4]
+    rgba: [0.5, 0.5, 0.5, 1.0]
+  - name: shelf1_post1
+    geom_type: cylinder
+    size: [0.015, 1.4]
+    position: [0.15, -1.0, 0.7]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: shelf1_post2
+    geom_type: cylinder
+    size: [0.015, 1.4]
+    position: [0.85, -1.0, 0.7]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: shelf1_post3
+    geom_type: cylinder
+    size: [0.015, 1.4]
+    position: [0.15, -0.6, 0.7]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: shelf1_post4
+    geom_type: cylinder
+    size: [0.015, 1.4]
+    position: [0.85, -0.6, 0.7]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: pallet
+    geom_type: box
+    size: [0.4, 0.4, 0.05]
+    position: [1.5, 0.5, 0.15]
+    rgba: [0.6, 0.4, 0.2, 1.0]
+  - name: pallet_box
+    geom_type: box
+    size: [0.3, 0.3, 0.3]
+    position: [1.5, 0.5, 0.35]
+    rgba: [0.4, 0.3, 0.2, 1.0]
+    mass: 2.0
+  - name: shelf2
+    geom_type: box
+    size: [0.6, 0.3, 1.4]
+    position: [-0.5, 0.5, 0.7]
+    rgba: [0.5, 0.5, 0.5, 1.0]
+  - name: forklift_base
+    geom_type: box
+    size: [0.4, 0.3, 0.3]
+    position: [0.0, 1.2, 0.35]
+    rgba: [1.0, 0.8, 0.0, 1.0]
+  - name: forklift_fork
+    geom_type: box
+    size: [0.02, 0.15, 0.4]
+    position: [0.3, 1.2, 0.25]
+    rgba: [0.7, 0.7, 0.7, 1.0]

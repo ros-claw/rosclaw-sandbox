@@ -1,0 +1,22 @@
+task_id: go2_stand
+robot_id: unitree_go2
+world_id: flat_ground
+name: Go2 Stand Up
+
+action:
+  type: joint_position
+  hz: 50
+
+observation:
+  - joint_position
+  - joint_velocity
+  - imu
+
+goal:
+  type: stand
+  target_height: 0.3
+
+termination:
+  max_steps: 300
+  success_distance: 0.05
+  collision_fail: false

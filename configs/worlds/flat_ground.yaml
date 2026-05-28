@@ -1,0 +1,11 @@
+world_id: flat_ground
+name: Flat Ground
+gravity: [0.0, 0.0, -9.81]
+ground_plane: true
+timestep: 0.002
+objects:
+  - name: ground_plane
+    geom_type: plane
+    size: [10.0, 10.0, 0.1]
+    position: [0.0, 0.0, 0.0]
+    rgba: [0.3, 0.3, 0.3, 1.0]

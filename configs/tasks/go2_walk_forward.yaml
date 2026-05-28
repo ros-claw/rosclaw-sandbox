@@ -1,0 +1,23 @@
+task_id: go2_walk_forward
+robot_id: unitree_go2
+world_id: flat_ground
+name: Go2 Walk Forward
+
+action:
+  type: joint_position
+  hz: 50
+
+observation:
+  - joint_position
+  - joint_velocity
+  - imu
+
+goal:
+  type: walk
+  direction: [1.0, 0.0, 0.0]
+  distance: 2.0
+
+termination:
+  max_steps: 1000
+  success_distance: 0.1
+  collision_fail: false

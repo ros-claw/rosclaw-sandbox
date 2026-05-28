@@ -1,0 +1,32 @@
+world_id: tabletop
+name: Tabletop Scene
+gravity: [0.0, 0.0, -9.81]
+ground_plane: true
+timestep: 0.002
+objects:
+  - name: table
+    geom_type: box
+    size: [0.5, 0.5, 0.02]
+    position: [0.5, 0.0, 0.4]
+    rgba: [0.6, 0.4, 0.2, 1.0]
+    mass: 0.0
+  - name: table_leg1
+    geom_type: cylinder
+    size: [0.02, 0.2]
+    position: [0.25, 0.25, 0.2]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: table_leg2
+    geom_type: cylinder
+    size: [0.02, 0.2]
+    position: [0.75, 0.25, 0.2]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: table_leg3
+    geom_type: cylinder
+    size: [0.02, 0.2]
+    position: [0.25, -0.25, 0.2]
+    rgba: [0.4, 0.4, 0.4, 1.0]
+  - name: table_leg4
+    geom_type: cylinder
+    size: [0.02, 0.2]
+    position: [0.75, -0.25, 0.2]
+    rgba: [0.4, 0.4, 0.4, 1.0]

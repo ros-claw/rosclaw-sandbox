@@ -1,0 +1,28 @@
+task_id: ur5e_sort_objects
+robot_id: universal_robots_ur5e
+world_id: factory
+name: UR5e Sort Objects on Conveyor
+
+action:
+  type: joint_position
+  hz: 20
+
+observation:
+  - joint_position
+  - joint_velocity
+  - end_effector_pose
+  - contact
+
+goal:
+  type: sort_sequence
+  objects:
+    - id: red_box
+      pick_pose: [1.0, 0.0, 0.2, 0.0, 3.14, 0.0]
+      place_pose: [1.5, 0.5, 0.2, 0.0, 3.14, 0.0]
+    - id: blue_box
+      pick_pose: [1.2, 0.0, 0.2, 0.0, 3.14, 0.0]
+      place_pose: [1.5, -0.5, 0.2, 0.0, 3.14, 0.0]
+
+termination:
+  max_steps: 2000
+  collision_fail: false

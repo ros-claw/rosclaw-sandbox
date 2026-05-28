@@ -1,0 +1,35 @@
+task_id: go2_navigate_target
+robot_id: unitree_go2
+world_id: warehouse
+name: Go2 Navigate to Target
+
+action:
+  type: joint_position
+  hz: 50
+
+observation:
+  - joint_position
+  - joint_velocity
+  - imu
+  - base_position
+
+goal:
+  type: navigate_to
+  target_position: [2.0, 1.0, 0.3]
+  target_orientation: [0.0, 0.0, 0.0]
+  tolerance: 0.2
+
+stages:
+  - name: stand
+    type: stand
+    target_height: 0.3
+    success_threshold: 0.05
+  - name: walk_to_target
+    type: walk
+    direction: [1.0, 0.5, 0.0]
+    distance: 2.2
+    success_distance: 0.3
+
+termination:
+  max_steps: 1500
+  collision_fail: false
