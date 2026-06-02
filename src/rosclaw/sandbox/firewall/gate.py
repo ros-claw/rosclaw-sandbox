@@ -120,9 +120,12 @@ class FirewallGate:
         if violations:
             risk_score = max(risk_score, min(1.0, 0.3 + 0.1 * len(violations)))
 
+        # Generate replay_id for ALL decisions (both ALLOW and BLOCK)
+        # This ensures full auditability — every firewall check is traceable.
+        replay_id = f"firewall_ep_{uuid.uuid4().hex[:8]}"
+
         # Make decision
         if risk_score >= self._risk_threshold or predicted_collision:
-            replay_id = f"firewall_ep_{uuid.uuid4().hex[:8]}"
             decision = FirewallDecision(
                 decision="BLOCK",
                 risk_score=risk_score,
@@ -147,10 +150,12 @@ class FirewallGate:
                 predicted_collision=False,
                 violated_constraints=[],
                 simulated_horizon_sec=self._horizon_sec,
+                replay_id=replay_id,
             )
             self._publisher.publish(FirewallActionAllowed(
                 robot_id=self._robot_id,
                 risk_score=decision.risk_score,
+                replay_id=replay_id,
                 payload={"horizon_sec": self._horizon_sec},
             ))
 

@@ -29,6 +29,7 @@ class TestSandboxEventPublishing:
             robot_id="universal_robots_ur5e",
             world_id="empty",
             publisher=publisher,
+            step_event_interval=1,
         )
         sandbox.reset()
         sandbox.step({"type": "noop"})
@@ -46,6 +47,7 @@ class TestSandboxEventPublishing:
             robot_id="universal_robots_ur5e",
             world_id="empty",
             publisher=publisher,
+            step_event_interval=1,
         )
         sandbox.reset()
         sandbox.step({"type": "noop"})

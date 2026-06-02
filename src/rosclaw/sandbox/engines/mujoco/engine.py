@@ -43,6 +43,7 @@ class MujocoEngine:
         self._data: Any = None
         self._step_count = 0
         self._renderer: Any = None
+        self._is_fallback: bool = False
 
         self._load_model()
 
@@ -50,6 +51,10 @@ class MujocoEngine:
         """Load MJCF model from robot profile or build a minimal world.
 
         Uses MujocoModelCache to avoid recompiling identical models.
+
+        CRITICAL: Robot model loading failures are NOT silently hidden.
+        If the MJCF has broken includes, we fallback to a minimal world
+        but set _is_fallback=True so callers can detect the degraded state.
         """
         mj = self._mujoco
         cache_key = self._build_cache_key()
@@ -61,17 +66,30 @@ class MujocoEngine:
             self._data = mj.MjData(self._model)
             return
 
-        if self._profile and self._profile.mjcf_path and Path(self._profile.mjcf_path).exists():
-            try:
-                self._model = mj.MjModel.from_xml_path(self._profile.mjcf_path)
-                self._data = mj.MjData(self._model)
-                self._model.opt.timestep = self._timestep
-                MujocoModelCache.put(cache_key, self._model)
-                return
-            except Exception as e:
-                print(f"[MujocoEngine] WARN: MJCF load failed ({e}), falling back to minimal world")
+        if self._profile and self._profile.mjcf_path:
+            if Path(self._profile.mjcf_path).exists():
+                try:
+                    self._model = mj.MjModel.from_xml_path(self._profile.mjcf_path)
+                    self._data = mj.MjData(self._model)
+                    self._model.opt.timestep = self._timestep
+                    MujocoModelCache.put(cache_key, self._model)
+                    return
+                except Exception as e:
+                    print(
+                        f"[MujocoEngine] ERROR: MJCF load failed for {self._profile.robot_id} "
+                        f"({self._profile.mjcf_path}): {e}\n"
+                        f"[MujocoEngine] Falling back to minimal world. "
+                        f"Physics will be degraded — no robot body loaded."
+                    )
+                    self._is_fallback = True
+            else:
+                print(
+                    f"[MujocoEngine] ERROR: Robot model file not found: {self._profile.mjcf_path}\n"
+                    f"[MujocoEngine] Falling back to minimal world."
+                )
+                self._is_fallback = True
 
-        # Build minimal world from scratch
+        # Build minimal world (either no profile, or fallback due to broken/missing MJCF)
         xml = self._build_minimal_xml()
         self._model = mj.MjModel.from_xml_string(xml)
         self._data = mj.MjData(self._model)
@@ -270,6 +288,10 @@ class MujocoEngine:
 
     def get_contact_state(self) -> list[dict]:
         return self._get_contacts()
+
+    @property
+    def is_fallback(self) -> bool:
+        return self._is_fallback
 
     @property
     def nq(self) -> int:

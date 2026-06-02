@@ -71,6 +71,7 @@ class SandboxTaskFailed(SandboxEvent):
 class FirewallActionAllowed(SandboxEvent):
     event_type: str = "FirewallActionAllowed"
     risk_score: float = 0.0
+    replay_id: str | None = None
 
 
 @dataclass
